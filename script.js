@@ -22,7 +22,7 @@ const membersData = {
             "avatar": "cadaver.jpg"
         },
         {
-            "name": "Eettah",
+            "name": "Eattah",
             "discord": "shadowcompany93",
             "avatar": "eettah.jpg"
         },
@@ -161,3 +161,4 @@ document.addEventListener('mousemove', (e) => {
     
     bgImage.style.transform += ` translate(${moveX}px, ${moveY}px)`;
 });
+
