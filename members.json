@@ -1,0 +1,34 @@
+{
+  "members": [
+    {
+      "name": "Luke",
+      "discord": "lukeplg",
+      "avatar": "luke.jpg"
+    },
+    {
+      "name": "Cera",
+      "discord": "ceraeor",
+      "avatar": "cera.jpg"
+    },
+    {
+      "name": "Danny",
+      "discord": "dannynhe",
+      "avatar": "danny.jpg"
+    },
+    {
+      "name": "Cadaver",
+      "discord": "cadaver_die",
+      "avatar": "cadaver.jpg"
+    },
+    {
+      "name": "Eettah",
+      "discord": "shadowcompany93",
+      "avatar": "eettah.jpg"
+    },
+    {
+      "name": "Abus",
+      "discord": "abus_e",
+      "avatar": "abus.jpg"
+    }
+  ]
+}
