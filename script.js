@@ -22,7 +22,7 @@ const membersData = {
             "avatar": "cadaver.jpg"
         },
         {
-            "name": "Eattah",
+            "name": "Eettah",
             "discord": "shadowcompany93",
             "avatar": "eettah.jpg"
         },
@@ -152,7 +152,36 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMembers();
     updateBackground();
     initMatrix();
+    showAnnouncementModal();
 });
+
+// Announcement Modal
+function showAnnouncementModal() {
+    const modal = document.getElementById('announcementModal');
+    const closeBtn = document.querySelector('.close-modal');
+    
+    // Show modal on page load
+    modal.style.display = 'block';
+    
+    // Close modal when clicking X
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
+    
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            modal.style.display = 'none';
+        }
+    });
+}
 
 // Mouse parallax effect
 document.addEventListener('mousemove', (e) => {
@@ -161,4 +190,3 @@ document.addEventListener('mousemove', (e) => {
     
     bgImage.style.transform += ` translate(${moveX}px, ${moveY}px)`;
 });
-
