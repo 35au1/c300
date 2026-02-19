@@ -30,6 +30,16 @@ const membersData = {
             "name": "Abus",
             "discord": "abus_e",
             "avatar": "abus.jpg"
+        },
+        {
+            "name": "Kody",
+            "discord": "_________sudo__________",
+            "avatar": "kody.jpg"
+        },
+        {
+            "name": "Ferdek",
+            "discord": "ferdek69",
+            "avatar": "ferdek.jpg"
         }
     ]
 };
@@ -79,9 +89,14 @@ function observeElements() {
 
 // Parallax background effect on scroll
 let lastScrollY = window.scrollY;
-const bgImage = document.querySelector('.bg-image');
+let bgImage;
 
 function updateBackground() {
+    if (!bgImage) {
+        bgImage = document.querySelector('.bg-image');
+        if (!bgImage) return;
+    }
+    
     const scrollY = window.scrollY;
     const scrollSpeed = scrollY - lastScrollY;
     
@@ -152,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadMembers();
     updateBackground();
     initMatrix();
-    showAnnouncementModal();
+    // showAnnouncementModal(); // Uncomment to enable announcement modal
 });
 
 // Announcement Modal
@@ -160,33 +175,40 @@ function showAnnouncementModal() {
     const modal = document.getElementById('announcementModal');
     const closeBtn = document.querySelector('.close-modal');
     
+    if (!modal || !closeBtn) return;
+    
     // Show modal on page load
     modal.style.display = 'block';
     
-    // Close modal when clicking X
-    closeBtn.onclick = function() {
+    function closeModal() {
         modal.style.display = 'none';
     }
     
+    // Close modal when clicking X
+    closeBtn.onclick = closeModal;
+    
     // Close modal when clicking outside of it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+    modal.onclick = function(event) {
+        if (event.target === modal) {
+            closeModal();
         }
     }
     
     // Close modal with Escape key
     document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            modal.style.display = 'none';
+        if (event.key === 'Escape' && modal.style.display === 'block') {
+            closeModal();
         }
     });
 }
 
 // Mouse parallax effect
 document.addEventListener('mousemove', (e) => {
+    const bg = document.querySelector('.bg-image');
+    if (!bg) return;
+    
     const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
     const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
     
-    bgImage.style.transform += ` translate(${moveX}px, ${moveY}px)`;
+    bg.style.transform += ` translate(${moveX}px, ${moveY}px)`;
 });
