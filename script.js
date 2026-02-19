@@ -22,7 +22,7 @@ const membersData = {
             "avatar": "cadaver.jpg"
         },
         {
-            "name": "Eettah",
+            "name": "Eattah",
             "discord": "shadowcompany93",
             "avatar": "eettah.jpg"
         },
