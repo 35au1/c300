@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Gallery Popup -->
+    <div id="galleryPopup" class="gallery-popup-overlay">
+        <div class="gallery-popup-content">
+            <button class="gallery-popup-close" id="galleryPopupClose">&times;</button>
+            <div class="gallery-popup-left">
+                <div class="gallery-popup-image-wrap">
+                    <img id="galleryPopupImg" src="" alt="" class="gallery-popup-img">
+                    <button class="gallery-nav gallery-nav-left" id="galleryPrev">&#8249;</button>
+                    <button class="gallery-nav gallery-nav-right" id="galleryNext">&#8250;</button>
+                </div>
+                <p id="galleryPopupDesc" class="gallery-popup-desc"></p>
+                <div class="gallery-popup-dots" id="galleryDots"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="announcementModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>

@@ -212,3 +212,124 @@ document.addEventListener('mousemove', (e) => {
     
     bg.style.transform += ` translate(${moveX}px, ${moveY}px)`;
 });
+
+// ===== Gallery Popup — reads from master Gist =====
+
+const MASTER_GIST_ID = 'a67bbfa0a2254bbf4f6567e3a4f94bf0';
+const INDEX_FILENAME = 'gallery-index.json';
+
+async function initGalleryPopup() {
+    const overlay       = document.getElementById('galleryPopup');
+    const closeBtn      = document.getElementById('galleryPopupClose');
+    const img           = document.getElementById('galleryPopupImg');
+    const desc          = document.getElementById('galleryPopupDesc');
+    const dotsContainer = document.getElementById('galleryDots');
+    const prevBtn       = document.getElementById('galleryPrev');
+    const nextBtn       = document.getElementById('galleryNext');
+
+    let images  = [];
+    let current = 0;
+
+    // ── Load images from Gist index ──────────────────────────
+    try {
+        const indexRes  = await fetch(`https://api.github.com/gists/${MASTER_GIST_ID}`);
+        const indexData = await indexRes.json();
+        const indexFile = indexData.files && indexData.files[INDEX_FILENAME];
+        if (!indexFile) throw new Error('index not found');
+
+        const ids = JSON.parse(indexFile.content);
+        if (!Array.isArray(ids) || ids.length === 0) throw new Error('empty');
+
+        const results = await Promise.allSettled(ids.slice().reverse().map(id => fetchImageGist(id)));
+        images = results
+            .filter(r => r.status === 'fulfilled' && r.value)
+            .map(r => r.value);
+    } catch (e) {
+        if (e.message !== 'empty' && e.message !== 'index not found') {
+            console.warn('Gallery load error:', e.message);
+        }
+    }
+
+    if (images.length === 0) return;
+
+    // ── Dots ─────────────────────────────────────────────────
+    function buildDots() {
+        dotsContainer.innerHTML = '';
+        images.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'gallery-dot' + (i === current ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateDots() {
+        dotsContainer.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === current);
+        });
+    }
+
+    function goTo(index) {
+        current = (index + images.length) % images.length;
+        img.classList.add('fade-swap');
+        setTimeout(() => {
+            img.src = images[current].src;
+            img.alt = images[current].description;
+            desc.textContent = images[current].description;
+            img.classList.remove('fade-swap');
+        }, 200);
+        updateDots();
+    }
+
+    img.src = images[0].src;
+    img.alt = images[0].description;
+    desc.textContent = images[0].description;
+    buildDots();
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    document.addEventListener('keydown', (e) => {
+        if (!overlay.classList.contains('active')) return;
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'Escape')     closePopup();
+    });
+
+    function closePopup() { overlay.classList.remove('active'); }
+    closeBtn.addEventListener('click', closePopup);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closePopup(); });
+
+    overlay.classList.add('active');
+}
+
+// Fetch a single image Gist → { src, description }
+async function fetchImageGist(id) {
+    const res  = await fetch(`https://api.github.com/gists/${id}`);
+    const data = await res.json();
+
+    const metaFile = data.files && data.files['gallery.json'];
+    const meta     = metaFile ? JSON.parse(metaFile.content) : {};
+
+    const b64File  = Object.values(data.files || {}).find(f => f.filename.endsWith('.b64'));
+    if (!b64File) return null;
+
+    let b64 = b64File.content;
+    if (b64File.truncated) {
+        const raw = await fetch(b64File.raw_url);
+        b64 = await raw.text();
+    }
+
+    const ext  = b64File.filename.replace('.b64', '').split('.').pop().toLowerCase();
+    const mime = { png: 'image/png', gif: 'image/gif', webp: 'image/webp' }[ext] || 'image/jpeg';
+
+    return {
+        src: `data:${mime};base64,${b64.trim()}`,
+        description: meta.description || data.description || ''
+    };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    initGalleryPopup();
+});
