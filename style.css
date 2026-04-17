@@ -824,15 +824,15 @@ body {
     align-items: center;
     justify-content: center;
     padding: 50px 40px 30px;
-    min-width: min(540px, 90vw);
-    max-width: min(540px, 90vw);
+    min-width: min(920px, 95vw);
+    max-width: min(920px, 95vw);
     gap: 16px;
 }
 
 .gallery-popup-image-wrap {
     position: relative;
-    width: min(500px, 80vw);
-    height: min(500px, 80vw);
+    width: min(850px, 90vw);
+    height: min(850px, 90vw);
     border-radius: 16px;
     overflow: hidden;
     border: 2px solid rgba(74, 14, 78, 0.4);
