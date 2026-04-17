@@ -305,26 +305,28 @@ async function initGalleryPopup() {
 
 // Fetch a single image Gist → { src, description }
 async function fetchImageGist(id) {
-    // Use API to get file list (needed to find filenames)
-    const res  = await fetch(`https://api.github.com/gists/${id}`);
-    const data = await res.json();
+    // Fetch gallery.json metadata via raw URL
+    const metaUrl = `https://gist.githubusercontent.com/35au1/${id}/raw/gallery.json`;
+    let meta = {};
+    try {
+        const metaRes = await fetch(metaUrl);
+        if (metaRes.ok) meta = await metaRes.json();
+    } catch(e) {}
 
-    const metaFile = data.files && data.files['gallery.json'];
-    const meta     = metaFile ? JSON.parse(metaFile.content) : {};
+    if (!meta.filename) return null;
 
-    const b64File  = Object.values(data.files || {}).find(f => f.filename.endsWith('.b64'));
-    if (!b64File) return null;
+    // Fetch the b64 image via raw URL
+    const b64Url = `https://gist.githubusercontent.com/35au1/${id}/raw/${meta.filename}.b64`;
+    const b64Res = await fetch(b64Url);
+    if (!b64Res.ok) return null;
+    const b64 = await b64Res.text();
 
-    // Fetch raw b64 content via raw_url to avoid truncation and API limits
-    const raw = await fetch(b64File.raw_url);
-    const b64 = await raw.text();
-
-    const ext  = b64File.filename.replace('.b64', '').split('.').pop().toLowerCase();
+    const ext  = meta.filename.split('.').pop().toLowerCase();
     const mime = { png: 'image/png', gif: 'image/gif', webp: 'image/webp' }[ext] || 'image/jpeg';
 
     return {
         src: `data:${mime};base64,${b64.trim()}`,
-        description: meta.description || data.description || ''
+        description: meta.description || ''
     };
 }
 
