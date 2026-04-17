@@ -232,12 +232,11 @@ async function initGalleryPopup() {
 
     // ── Load images from Gist index ──────────────────────────
     try {
-        const indexRes  = await fetch(`https://api.github.com/gists/${MASTER_GIST_ID}`);
-        const indexData = await indexRes.json();
-        const indexFile = indexData.files && indexData.files[INDEX_FILENAME];
-        if (!indexFile) throw new Error('index not found');
-
-        const ids = JSON.parse(indexFile.content);
+        // Use raw URL to avoid API rate limits (no auth needed)
+        const rawUrl = `https://gist.githubusercontent.com/35au1/${MASTER_GIST_ID}/raw/${INDEX_FILENAME}`;
+        const indexRes  = await fetch(rawUrl);
+        if (!indexRes.ok) throw new Error(`HTTP ${indexRes.status}`);
+        const ids = await indexRes.json();
         if (!Array.isArray(ids) || ids.length === 0) throw new Error('empty');
 
         const results = await Promise.allSettled(ids.slice().reverse().map(id => fetchImageGist(id)));
@@ -306,6 +305,7 @@ async function initGalleryPopup() {
 
 // Fetch a single image Gist → { src, description }
 async function fetchImageGist(id) {
+    // Use API to get file list (needed to find filenames)
     const res  = await fetch(`https://api.github.com/gists/${id}`);
     const data = await res.json();
 
@@ -315,11 +315,9 @@ async function fetchImageGist(id) {
     const b64File  = Object.values(data.files || {}).find(f => f.filename.endsWith('.b64'));
     if (!b64File) return null;
 
-    let b64 = b64File.content;
-    if (b64File.truncated) {
-        const raw = await fetch(b64File.raw_url);
-        b64 = await raw.text();
-    }
+    // Fetch raw b64 content via raw_url to avoid truncation and API limits
+    const raw = await fetch(b64File.raw_url);
+    const b64 = await raw.text();
 
     const ext  = b64File.filename.replace('.b64', '').split('.').pop().toLowerCase();
     const mime = { png: 'image/png', gif: 'image/gif', webp: 'image/webp' }[ext] || 'image/jpeg';
