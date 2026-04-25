@@ -1,69 +1,314 @@
 // Members data
 const membersData = {
-    "members": [
+    "sections": [
         {
-            "name": "Luke",
-            "discord": "lukeplg",
-            "avatar": "luke.jpg"
+            "title": "C300 Main",
+            "members": [
+                {
+                    "name": "Luke",
+                    "discord": "lukeplg",
+                    "avatar": "luke.jpg"
+                },
+                {
+                    "name": "Cera",
+                    "discord": "ceraeor",
+                    "avatar": "cera.jpg"
+                },
+                {
+                    "name": "Danny",
+                    "discord": "dannynhe",
+                    "avatar": "danny.jpg"
+                },
+                {
+                    "name": "Cadaver",
+                    "discord": "cadaver_die",
+                    "avatar": "cadaver.jpg"
+                },
+                {
+                    "name": "Eattah",
+                    "discord": "shadowcompany93",
+                    "avatar": "eettah.jpg"
+                },
+                {
+                    "name": "Kody",
+                    "discord": "_________sudo__________",
+                    "avatar": "kody.jpg"
+                },
+                {
+                    "name": "Ferdek",
+                    "discord": "ferdek69",
+                    "avatar": "ferdek.jpg"
+                },
+                {
+                    "name": "Caler",
+                    "discord": "caler",
+                    "avatar": "caler.jpg"
+                },
+                {
+                    "name": "Fancy",
+                    "discord": "fancy",
+                    "avatar": "fancy.jpg"
+                },
+                {
+                    "name": "Abus",
+                    "discord": "abus_e",
+                    "avatar": "abus.jpg"
+                }
+            ]
         },
         {
-            "name": "Cera",
-            "discord": "ceraeor",
-            "avatar": "cera.jpg"
+            "title": "C300 1st Brigade",
+            "members": [
+                {
+                    "name": "Chad",
+                    "discord": "chad",
+                    "avatar": "chad.jpg"
+                },
+                {
+                    "name": "Dales",
+                    "discord": "dales",
+                    "avatar": "dales.jpg"
+                },
+                {
+                    "name": "Dong",
+                    "discord": "dong",
+                    "avatar": "dong.jpg"
+                },
+                {
+                    "name": "Edux",
+                    "discord": "edux",
+                    "avatar": "edux.jpg"
+                },
+                {
+                    "name": "Exiled",
+                    "discord": "exiled",
+                    "avatar": "exiled.jpg"
+                },
+                {
+                    "name": "Faebie",
+                    "discord": "faebie",
+                    "avatar": "faebie.jpg"
+                },
+                {
+                    "name": "Geodark",
+                    "discord": "geodark",
+                    "avatar": "geodark.jpg"
+                },
+                {
+                    "name": "JD",
+                    "discord": "jd",
+                    "avatar": "jd.jpg"
+                },
+                {
+                    "name": "Loulou",
+                    "discord": "loulou",
+                    "avatar": "loulou.jpg"
+                },
+                {
+                    "name": "MrCook",
+                    "discord": "mrcook",
+                    "avatar": "mrcook.jpg"
+                },
+                {
+                    "name": "Plasmastar",
+                    "discord": "plasmastar",
+                    "avatar": "plasmastar.jpg"
+                }
+            ]
         },
         {
-            "name": "Danny",
-            "discord": "dannynhe",
-            "avatar": "danny.jpg"
+            "title": "C300 Tech Guys",
+            "members": [
+                {
+                    "name": "JetFox",
+                    "discord": "jetfox",
+                    "avatar": "jetfox.jpg"
+                },
+                {
+                    "name": "Exile",
+                    "discord": "exile",
+                    "avatar": "exile.jpg"
+                },
+                {
+                    "name": "Null",
+                    "discord": "null",
+                    "avatar": "null.jpg"
+                }
+            ]
         },
         {
-            "name": "Cadaver",
-            "discord": "cadaver_die",
-            "avatar": "cadaver.jpg"
+            "title": "Peacebringers",
+            "members": [
+                {
+                    "name": "MissElectric",
+                    "discord": "misselectric",
+                    "avatar": "misselectric.jpg"
+                },
+                {
+                    "name": "Crysis",
+                    "discord": "crysis",
+                    "avatar": "crysis.jpg"
+                },
+                {
+                    "name": "Damian",
+                    "discord": "damian",
+                    "avatar": "damian.jpg"
+                },
+                {
+                    "name": "Catboyfriend",
+                    "discord": "catboyfriend",
+                    "avatar": "catboyfriend.jpg"
+                },
+                {
+                    "name": "Turkey",
+                    "discord": "turkey",
+                    "avatar": "turkey.jpg"
+                },
+                {
+                    "name": "Sydus",
+                    "discord": "sydus",
+                    "avatar": "sydus.jpg"
+                },
+                {
+                    "name": "Sasuko",
+                    "discord": "sasuko",
+                    "avatar": "sasuko.jpg"
+                },
+                {
+                    "name": "Tiffany",
+                    "discord": "tiffany",
+                    "avatar": "tiffany.jpg"
+                },
+                {
+                    "name": "Crypt",
+                    "discord": "crypt",
+                    "avatar": "crypt.jpg"
+                },
+                {
+                    "name": "Karl",
+                    "discord": "karl",
+                    "avatar": "karl.jpg"
+                },
+                {
+                    "name": "Milfelle",
+                    "discord": "milfelle",
+                    "avatar": "milfelle.jpg"
+                },
+                {
+                    "name": "Abillie",
+                    "discord": "abillie",
+                    "avatar": "abillie.jpg"
+                },
+                {
+                    "name": "Empire",
+                    "discord": "empire",
+                    "avatar": "empire.jpg"
+                },
+                {
+                    "name": "Aridian",
+                    "discord": "aridian",
+                    "avatar": "aridian.jpg"
+                },
+                {
+                    "name": "Fawna",
+                    "discord": "fawna",
+                    "avatar": "fawna.jpg"
+                }
+            ]
         },
         {
-            "name": "Eattah",
-            "discord": "shadowcompany93",
-            "avatar": "eettah.jpg"
+            "title": "PLC",
+            "members": [
+                {
+                    "name": "Buzok",
+                    "discord": "buzok",
+                    "avatar": "buzok.jpg"
+                },
+                {
+                    "name": "Portego",
+                    "discord": "portego",
+                    "avatar": "portego.jpg"
+                },
+                {
+                    "name": "Trendy",
+                    "discord": "trendy",
+                    "avatar": "trendy.jpg"
+                },
+                {
+                    "name": "Dzik",
+                    "discord": "dzik",
+                    "avatar": "dzik.jpg"
+                },
+                {
+                    "name": "Qutor",
+                    "discord": "qutor",
+                    "avatar": "qutor.jpg"
+                }
+            ]
         },
         {
-            "name": "Abus",
-            "discord": "abus_e",
-            "avatar": "abus.jpg"
-        },
-        {
-            "name": "Kody",
-            "discord": "_________sudo__________",
-            "avatar": "kody.jpg"
-        },
-        {
-            "name": "Ferdek",
-            "discord": "ferdek69",
-            "avatar": "ferdek.jpg"
+            "title": "He went for the milk",
+            "members": [
+                {
+                    "name": "Darknoud",
+                    "discord": "darknoud",
+                    "avatar": "darknoud.jpg"
+                },
+                {
+                    "name": "Abus",
+                    "discord": "abus_e",
+                    "avatar": "abus.jpg"
+                },
+                {
+                    "name": "Luke",
+                    "discord": "lukeplg",
+                    "avatar": "luke.jpg"
+                },
+                {
+                    "name": "Null",
+                    "discord": "null",
+                    "avatar": "null.jpg"
+                }
+            ]
         }
     ]
 };
 
 // Load members data and render cards
 function loadMembers() {
-    renderMembers(membersData.members);
+    renderMembers(membersData.sections);
 }
 
-function renderMembers(members) {
+function renderMembers(sections) {
     const grid = document.getElementById('membersGrid');
     
-    members.forEach((member, index) => {
-        const card = document.createElement('div');
-        card.className = 'member-card';
-        card.style.transitionDelay = `${index * 0.1}s`;
+    sections.forEach((section, sectionIndex) => {
+        // Create section title
+        const sectionTitle = document.createElement('h3');
+        sectionTitle.className = 'section-title fade-in';
+        sectionTitle.textContent = section.title;
+        sectionTitle.style.transitionDelay = `${sectionIndex * 0.1}s`;
+        grid.appendChild(sectionTitle);
         
-        card.innerHTML = `
-            <img src="${member.avatar}" alt="${member.name}" class="member-avatar">
-            <h3 class="member-name">${member.name}</h3>
-            <p class="member-discord">${member.discord}</p>
-        `;
+        // Create section container
+        const sectionContainer = document.createElement('div');
+        sectionContainer.className = 'section-container';
         
-        grid.appendChild(card);
+        section.members.forEach((member, index) => {
+            const card = document.createElement('div');
+            card.className = 'member-card';
+            card.style.transitionDelay = `${(sectionIndex * 0.1) + (index * 0.05)}s`;
+            
+            card.innerHTML = `
+                <img src="${member.avatar}" alt="${member.name}" class="member-avatar">
+                <h3 class="member-name">${member.name}</h3>
+                <p class="member-discord">${member.discord}</p>
+            `;
+            
+            sectionContainer.appendChild(card);
+        });
+        
+        grid.appendChild(sectionContainer);
     });
     
     observeElements();

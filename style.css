@@ -597,9 +597,33 @@ body {
 
 .cards-grid {
     display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #b19cd9;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(177, 156, 217, 0.5);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.section-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-container {
+    display: flex;
     flex-wrap: wrap;
     gap: 40px;
-    padding: 20px;
     justify-content: center;
 }
 
